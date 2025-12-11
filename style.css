@@ -54,9 +54,21 @@ html {
 .logo {
     display: flex;
     align-items: center;
+    display: flex;
+    align-items: center;
     font-weight: 600;
     letter-spacing: 2px;
     font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.logo video {
+    height: 50px;          
+    width: auto;         
+    margin-right: 15px;    
+    object-fit: cover;    
+    mix-blend-mode: multiply; 
     color: #333;
     text-decoration: none;
 }
