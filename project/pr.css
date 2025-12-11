@@ -1,0 +1,549 @@
+/* =========================================
+   1. GLOBAL RESET & TYPOGRAPHY
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #6a4532;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* =========================================
+   2. UTILITIES & SECTIONS
+   ========================================= */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.bg-light {
+    background-color: #f9f9f9;
+}
+
+/* Buttons */
+.btn-outline {
+    padding: 12px 30px;
+    border: 1px solid #6a4532;
+    color: #6a4532;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background: #6a4532;
+    color: #fff;
+}
+
+/* Animations - VISIBILITY FIX */
+/* We default opacity to 1 so content shows up even if JS fails */
+.fade-in {
+    opacity: 1; 
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* The JS will add 'appear' class, but since we start visible, 
+   we only animate if we manually set opacity to 0 in JS. 
+   This is the safest approach for now. */
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   3. NAVIGATION BAR
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.logo video {
+    height: 50px;          
+    width: auto;         
+    margin-right: 15px;    
+    object-fit: cover;    
+    mix-blend-mode: multiply; 
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: #6a4532;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #888;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative; 
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    z-index: 1000;
+    top: 100%; 
+    left: 0;
+    padding: 10px 0;
+    border-top: 3px solid #6a4532; 
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdown-content li {
+    width: 100%;
+}
+
+.dropdown-content a {
+    padding: 12px 20px;
+    display: block;
+    transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Burger Menu */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 2px;
+    background-color: #333;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Theme Switch */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 30px; 
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 3px;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #666; 
+}
+
+input:checked + .slider:before {
+    transform: translateX(28px);
+}
+
+/* =========================================
+   4. PROJECT LAYOUT (Mellow Specific)
+   ========================================= */
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    padding-top: 120px; /* Space for fixed navbar */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 50px;
+}
+
+/* Sticky Sidebar */
+.project-sidebar {
+    flex: 0 0 250px; /* Fixed width */
+    position: sticky;
+    top: 120px; /* Sticks when scrolling */
+    height: fit-content;
+    padding-bottom: 50px;
+}
+
+.sidebar-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #6a4532;
+    margin-bottom: 30px;
+    line-height: 1;
+}
+
+.project-specs {
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+}
+
+.project-specs li {
+    margin-bottom: 20px;
+}
+
+.spec-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.spec-value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 400;
+}
+
+/* Main Content Area */
+.project-main-content {
+    flex: 1; /* Takes remaining space */
+    min-width: 0;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 40px;
+    max-width: 800px;
+}
+
+/* =========================================
+   5. SLIDER & GALLERY COMPONENTS
+   ========================================= */
+.portfolio-slider {
+    position: relative;
+    width: 100%;
+    /* Default height for this page */
+    height: 60vh; 
+    overflow: hidden;
+    margin-bottom: 80px;
+    border-radius: 4px;
+}
+
+.slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-track.transition {
+    transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Slider Controls */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 20px 15px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.prev-btn { left: 0; border-radius: 0 5px 5px 0; }
+.next-btn { right: 0; border-radius: 5px 0 0 5px; }
+
+/* Room Gallery Grids */
+.gallery-section {
+    margin-bottom: 60px;
+}
+
+.gallery-title {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #6a4532;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.room-img {
+    width: 100%;
+    height: 350px;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s;
+}
+
+.room-img:hover {
+    opacity: 0.9;
+}
+
+/* =========================================
+   6. DARK MODE
+   ========================================= */
+body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .nav-links,
+body.dark-mode .dropdown-content {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode .navbar {
+    box-shadow: 0 2px 5px rgba(255,255,255,0.05);
+}
+
+body.dark-mode .nav-links a,
+body.dark-mode .logo span,
+body.dark-mode .sidebar-title,
+body.dark-mode .spec-value,
+body.dark-mode .gallery-title {
+    color: #f1f1f1;
+}
+
+body.dark-mode .hero-description,
+body.dark-mode .spec-label {
+    color: #ccc;
+}
+
+body.dark-mode .project-specs,
+body.dark-mode .gallery-title {
+    border-color: #333;
+}
+
+body.dark-mode .logo video {
+    filter: invert(1);
+    mix-blend-mode: screen; 
+}
+
+body.dark-mode .burger div {
+    background-color: #f1f1f1;
+}
+
+body.dark-mode .dropdown-content {
+    border-top-color: #f1f1f1;
+    box-shadow: 0 8px 16px rgba(255,255,255,0.05);
+}
+
+body.dark-mode .dropdown-content a:hover {
+    background-color: #333;
+}
+
+body.dark-mode .btn-outline {
+    border-color: #f1f1f1;
+    color: #f1f1f1;
+}
+
+body.dark-mode .btn-outline:hover {
+    background-color: #f1f1f1;
+    color: #121212;
+}
+
+/* =========================================
+   7. RESPONSIVE DESIGN (MOBILE)
+   ========================================= */
+@media screen and (max-width: 900px) {
+    .project-container {
+        flex-direction: column;
+        gap: 30px;
+        padding-top: 100px;
+    }
+    
+    .project-sidebar {
+        position: static;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .project-specs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        border-top: none;
+    }
+    
+    .sidebar-title {
+        font-size: 2rem;
+    }
+    
+    /* Shrink slider on tablets/mobile */
+    .portfolio-slider {
+        height: 40vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        padding-top: 50px;
+    }
+    
+    .nav-links li {
+        margin: 20px 0;
+    }
+    
+    .burger {
+        display: block;
+    }
+    
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    .dropdown-content {
+        position: static; 
+        box-shadow: none;
+        border-top: none;
+        padding-left: 20px; 
+        background-color: transparent;
+        display: none;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .slider-btn {
+        padding: 10px;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .room-grid {
+        grid-template-columns: 1fr;
+    }
+    .room-img {
+        height: 250px;
+    }
+}
